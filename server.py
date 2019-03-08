@@ -80,11 +80,11 @@ def hello():
 @app.route("/entity/<entity>", methods=['POST','PUT'])
 def update(entity):
     '''update the entities via this interface'''
-    data = flask_post_json()
-    for key, value in data.items():
-        myWorld.update(entity, key, value)
+    v = flask_post_json()
+    myWorld.set( entity, v )
+    e = myWorld.get(entity)    
     #returning status code referenced by lacks: https://stackoverflow.com/questions/7824101/return-http-status-code-201-in-flask    
-    return json.dumps(myWorld.get(entity)), 200
+    return json.dumps(e), 200
 
 @app.route("/world", methods=['POST','GET'])    
 def world():
